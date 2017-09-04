@@ -328,3 +328,36 @@ class Game extends React.Component {
 // ========================================
 
 /*事件处理*/
+class Toggle extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			isToggleOn: true
+		};
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick() {
+		this.setState(prevState => ({
+			isToggleOn: !prevState.isToggleOn
+		}))
+	}
+	render() {
+		return (
+			<button onClick={this.handleClick}>
+				{this.state.isToggleOn?'on':'off'}
+			</button>
+		)
+	}
+}
+ReactDOM.render(
+	<Toggle/>,
+	document.getElementById('root')
+)
+
+/*注意：组件内回调函数中的this，不会默认指向类的this，若忘记绑定
+类的this，则会报错。
+React建议的处理方法是：
+1、在constructor中bind(this);
+2、使用属性初始化器语法，例如hanleClick=()=>{
+	console.log(this)--this是类的this（ES6箭头函数的特性）
+}*/
