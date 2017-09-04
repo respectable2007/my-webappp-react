@@ -173,8 +173,26 @@ class Game extends React.Component {
 }
 
 // ========================================
+/*JSX语法*/
+// var names = ['Alice', 'Emily', 'Kate'];
+// ReactDOM.render(
+// 	<ul>{
+// 		names.map((name)=>{
+// 			return(
+// 				<li key={name}>
+// 					Hello,{name}!
+// 				</li>
+// 			)
+// 		})
+// 	}</ul>,
+// 	document.getElementById('root')
+// );
 
-ReactDOM.render(
-	<Game />,
-	document.getElementById('root')
-);
+/*JSX允许直接在模版插入js变量，若变量为数组，则会展开数组的所有成员*/
+// let hs = [<h1>你好,世界!</h1>, <h2>世界，你好!，我是花卷</h2>]
+// ReactDOM.render(
+// 	<div>{hs}</div>,
+// 	document.getElementById('root')
+// )
+
+/*组件*/
