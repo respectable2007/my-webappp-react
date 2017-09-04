@@ -252,3 +252,79 @@ class Game extends React.Component {
 
 /*提取组件：在大型应用中，构建可复用的组件完全是值得的*/
 /*props是只读的*/
+
+// ========================================
+
+/*state*/
+/*更新UI：方法一*/
+// function tick() {
+// 	const element = (
+// 		<div>
+// 			<h1>hello,huajuan!</h1>
+// 			<h2>It is {new Date().toLocaleTimeString()}.</h2>
+// 		</div>
+// 	);
+// 	ReactDOM.render(
+// 		element,
+// 		document.getElementById('root')
+// 	)
+// }
+// setInterval(tick, 1000);
+
+/*可重复和封装的组件的示例-clock*/
+// function Clock(props) {
+// 	return (
+// 		<div>
+// 			<h1>Hello,huajuan!</h1>
+// 			<h2>It is {props.date.toLocaleTimeString()}.</h2>
+// 		</div>
+// 	)
+// }
+
+// function tick() {
+// 	ReactDOM.render(
+// 		<Clock date={new Date()}/>,
+// 		document.getElementById('root')
+// 	)
+// }
+// setInterval(tick, 1000);
+/*以上组件UI更新并未有clock组件自身更新，而是由tick函数传入参数实现的
+因此，需要将clock组件进行改造，改造如下：*/
+// class Clock extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			date: new Date()
+// 		}
+// 	}
+// 	componentDidMount() {
+// 		this.timerID = setInterval(
+// 			() => this.tick(),
+// 			1000
+// 		)
+// 	}
+// 	componentWillUnMount() {
+// 		clearInterval(this.timerID);
+// 	}
+// 	tick() {
+// 		this.setState({
+// 			date: new Date()
+// 		})
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<h1>Hello,huajuan!</h1>
+// 				<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+// 			</div>
+// 		);
+// 	}
+// }
+// ReactDOM.render(
+// 	<Clock/>,
+// 	document.getElementById('root')
+// )
+
+// ========================================
+
+/*事件处理*/
