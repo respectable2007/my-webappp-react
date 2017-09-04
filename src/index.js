@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+/*react入门指南-井字棋游戏*/
 // class Square extends React.Component {
 // 	// constructor() {
 // 	// 	super();
@@ -173,6 +174,7 @@ class Game extends React.Component {
 }
 
 // ========================================
+
 /*JSX语法*/
 // var names = ['Alice', 'Emily', 'Kate'];
 // ReactDOM.render(
@@ -189,10 +191,64 @@ class Game extends React.Component {
 // );
 
 /*JSX允许直接在模版插入js变量，若变量为数组，则会展开数组的所有成员*/
-// let hs = [<h1>你好,世界!</h1>, <h2>世界，你好!，我是花卷</h2>]
+// let hs = [<h1>你好,世界!</h1>, <h2>世界，你好!我是花卷</h2>]
 // ReactDOM.render(
 // 	<div>{hs}</div>,
 // 	document.getElementById('root')
 // )
 
-/*组件*/
+// ========================================
+
+/*函数定义/类定义组件*/
+// function Msg(props) {
+// 	return (<h1>Hello,{props.name}!</h1>);
+// }
+// ReactDOM.render(
+// 	<Msg name="huajuan"/>,
+// 	document.getElementById('root')
+// )
+
+/*ES6 class定义组件*/
+// class Msg extends React.Component {
+// 	render() {
+// 		return <h1>Hello,{this.props.name}</h1>;
+// 	}
+// }
+// ReactDOM.render(
+// 	<Msg name='huajuan'/>,
+// 	document.getElementById('root')
+// )
+
+/*组件渲染*/
+// function Msg(props) {
+// 	return (<h1>{props.name}</h1>);
+// }
+// const element = <Msg name='huajuan'/>;
+// ReactDOM.render(
+// 	element,
+// 	document.getElementById('root')
+// )
+
+/*组件名称必须以大写字母开头*/
+
+/*组合组件，组件可以在它的输出中引用其他组件*/
+// function Msg(props) {
+// 	return <h1>{props.name}</h1>;
+// }
+
+// function App() {
+// 	return (
+// 		<div>
+// 			<Msg name='huajuan1'/>
+// 			<Msg name='huajuan2'/>
+// 			<Msg name='huajuan3'/>
+// 		</div>
+// 	)
+// }
+// ReactDOM.render(
+// 	<App/>,
+// 	document.getElementById('root')
+// )
+
+/*提取组件：在大型应用中，构建可复用的组件完全是值得的*/
+/*props是只读的*/
