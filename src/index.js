@@ -361,3 +361,53 @@ React建议的处理方法是：
 2、使用属性初始化器语法，例如hanleClick=()=>{
 	console.log(this)--this是类的this（ES6箭头函数的特性）
 }*/
+
+// ========================================
+
+/*条件渲染*/
+// function UserGreeting() {
+// 	return <h1>Welcome back!</h1>;
+// }
+
+// function GuestGreeting() {
+// 	return <h1>Please sign up.</h1>;
+// }
+
+// function Greeting(props) {
+// 	const isLoggedIn = props.isLoggedIn;
+// 	if (isLoggedIn) {
+// 		return <UserGreeting/>;
+// 	}
+// 	return <GuestGreeting/>;
+// }
+// class LoginControl extends React.Component {
+// 	constructor() {
+// 		super()
+// 		this.state = {
+// 			isLoggedOn: true
+// 		}
+// 	}
+// 	handleClick = () => {
+// 		this.setState(prevState => ({
+// 			isLoggedOn: !prevState.isLoggedOn
+// 		}))
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<button onClick={this.handleClick}>
+// 					{this.state.isLoggedOn?'on':'off'}
+// 				</button>
+// 				<Greeting isLoggedIn={this.state.isLoggedOn}/>
+// 			</div>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<LoginControl/>,
+// 	document.getElementById('root')
+// )
+
+// ========================================
+
+/*与运算符&&*/
