@@ -446,42 +446,79 @@ React建议的处理方法是：
 // )
 
 /*阻止组件渲染：render方法返回null即可阻止组件渲染*/
-function WarningBanner(props) {
-	if (!props.warn) {
-		return null;
-	}
-	return (
-		<div className='warning'>
-			Warning!
-		</div>
-	)
-}
-class Page extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			showWarning: true
-		}
-	}
-	handleClick = () => {
-		this.setState(prevState => ({
-			showWarning: !prevState.showWarning
-		}))
-	}
-	render() {
-		return (
-			<div>
-				<WarningBanner warn={this.state.showWarning}/>
-				<button onClick={this.handleClick}>
-					{
-						this.state.showWarning?'Hide':'Show'
-					}
-				</button>
-			</div>
-		)
-	}
-}
-ReactDOM.render(
-	<Page/>,
-	document.getElementById('root')
-)
+// function WarningBanner(props) {
+// 	if (!props.warn) {
+// 		return null;
+// 	}
+// 	return (
+// 		<div className='warning'>
+// 			Warning!
+// 		</div>
+// 	)
+// }
+// class Page extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			showWarning: true
+// 		}
+// 	}
+// 	handleClick = () => {
+// 		this.setState(prevState => ({
+// 			showWarning: !prevState.showWarning
+// 		}))
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<WarningBanner warn={this.state.showWarning}/>
+// 				<button onClick={this.handleClick}>
+// 					{
+// 						this.state.showWarning?'Hide':'Show'
+// 					}
+// 				</button>
+// 			</div>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<Page/>,
+// 	document.getElementById('root')
+// )
+
+// ========================================
+
+/*列表&keys*/
+/*渲染多样的组件*/
+// const numbers = [1, 2, 3, 4, 5];
+// const list = numbers.map(item =>
+// 	<li>{item}</li>
+// )
+// ReactDOM.render(
+// 	<ul>
+// 		{list}
+// 	</ul>,
+// 	document.getElementById('root')
+// )
+
+/*基础列表组件*/
+// function NumberList(props) {
+// 	const numbers = props.numbers;
+// 	const list = numbers.map(item =>
+// 		<li key={item}>{item}</li>
+// 	)
+// 	return (
+// 		<ul>
+// 			{list}
+// 		</ul>
+// 	);
+// }
+// const numbers = [1, 2, 3, 4, 5, 6];
+// ReactDOM.render(
+// 	<NumberList numbers={numbers}/>,
+// 	document.getElementById('root')
+// )
+
+// ========================================
+
+/*表单*/
