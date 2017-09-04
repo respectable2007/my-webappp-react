@@ -411,3 +411,77 @@ React建议的处理方法是：
 // ========================================
 
 /*与运算符&&*/
+// function Mailbox(props) {
+// 	const unreadMsg = props.unreadMsg;
+// 	return (
+// 		<div>
+// 			<h1>Hello!</h1>
+// 			{
+// 				unreadMsg.length>0&&
+// 				<h2>
+// 					You have {unreadMsg.length} unread messages.
+// 				</h2>
+// 			}
+// 		</div>
+// 	)
+// }
+// let messages = ['React', 'Re:React', 'Re:Re:React'];
+// ReactDOM.render(
+// 	<Mailbox unreadMsg={messages}/>,
+// 	document.getElementById('root')
+// )
+
+/*三目运算符*/
+// function Box(props) {
+// 	const isLoggedIn = props.isLoggedIn;
+// 	return (
+// 		<div>
+// 			The user is <b>{isLoggedIn?'currently':'not'}</b> logged in.
+// 		</div>
+// 	)
+// }
+// ReactDOM.render(
+// 	<Box isLoggedIn={false}/>,
+// 	document.getElementById('root')
+// )
+
+/*阻止组件渲染：render方法返回null即可阻止组件渲染*/
+function WarningBanner(props) {
+	if (!props.warn) {
+		return null;
+	}
+	return (
+		<div className='warning'>
+			Warning!
+		</div>
+	)
+}
+class Page extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			showWarning: true
+		}
+	}
+	handleClick = () => {
+		this.setState(prevState => ({
+			showWarning: !prevState.showWarning
+		}))
+	}
+	render() {
+		return (
+			<div>
+				<WarningBanner warn={this.state.showWarning}/>
+				<button onClick={this.handleClick}>
+					{
+						this.state.showWarning?'Hide':'Show'
+					}
+				</button>
+			</div>
+		)
+	}
+}
+ReactDOM.render(
+	<Page/>,
+	document.getElementById('root')
+)
