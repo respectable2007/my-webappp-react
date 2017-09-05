@@ -750,4 +750,121 @@ React建议的处理方法是：
 
 // ========================================
 
-/*组合和继承*/
+/*组合和继承:react具有强大的组合模型，建议使用组合而不是继承来复用组件间的代码*/
+/*包含关系*/
+/*使用children属性将子元素直接传递到输出,
+props.children代表组件的子节点*/
+// function FancyBorder(props) {
+// 	return (
+// 		<div className={'FancyBorder FancyBorder-'+props.color}>
+// 		{props.children}
+// 		</div>
+// 	)
+// }
+
+// function WelcomeDialog() {
+// 	return (
+// 		<FancyBorder color='blue'>
+// 			<h1 className='Dialog-title'>
+// 				Welcome
+// 			</h1>
+// 			<p className='Dialog-message'>
+// 				Thank you for visiting our spacecraft!
+// 			</p>
+// 		</FancyBorder>
+// 	)
+// }
+// ReactDOM.render(
+// 	<WelcomeDialog/>,
+// 	document.getElementById('root')
+// )
+/*多入口，可以使用其他属性进行搭建*/
+// function Contacts() {
+// 	return (
+// 		<h1>left</h1>
+// 	)
+// }
+
+// function Chat() {
+// 	return (
+// 		<h1>right</h1>
+// 	)
+// }
+
+// function SplitPane(props) {
+// 	return (
+// 		<div className='SplitPane'>
+// 			<div className='SplitPane-left'>
+// 				{props.left}
+// 			</div>
+// 			<div className='SplitPane-right'>
+// 				{props.right}
+// 			</div>
+// 		</div>
+// 	)
+// }
+
+// function App() {
+// 	return (
+// 		<SplitPane left={<Contacts/>}
+// 				    right={<Chat/>}/>
+// 	)
+// }
+// ReactDOM.render(
+// 	<App/>,
+// 	document.getElementById('root')
+// )
+/*特殊实例*/
+// function FancyBorder(props) {
+// 	return (
+// 		<div className='SplitPane'>
+// 			{props.children}
+// 		</div>
+// 	)
+// }
+
+// function Dialog(props) {
+// 	return (
+// 		<FancyBorder>
+// 			<h1>
+// 				{props.title}
+// 			</h1>
+// 			<p>
+// 				{props.messages}
+// 			</p>
+// 			{props.children}
+// 		</FancyBorder>
+// 	)
+// }
+// class SignUpDialog extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			login: ''
+// 		}
+// 	}
+// 	handleChange = (e) => {
+// 		this.setState({
+// 			login: e.target.value
+// 		})
+// 	}
+// 	handleSignUp = (e) => {
+// 		alert(`Welcome aboard,${this.state.login}!`)
+// 	}
+// 	render() {
+// 		return (
+// 			<Dialog title = 'Mars Exploration Program'
+// 						messages = 'How should we refer to you?' >
+// 				<input value={this.state.login}
+// 					   onChange={this.handleChange}/>
+// 				<button onClick={this.handleSignUp}>
+// 					Sign Me Up!
+// 				</button>
+// 			</Dialog>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<SignUpDialog/>,
+// 	document.getElementById('root')
+// )
