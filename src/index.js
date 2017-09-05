@@ -868,3 +868,167 @@ props.children代表组件的子节点*/
 // 	<SignUpDialog/>,
 // 	document.getElementById('root')
 // )
+
+// ========================================
+
+/*React理念-可搜索的产品数据表格*/
+let PRODUCTS = [{
+	category: 'Sporting Goods',
+	price: '$49.99',
+	stocked: true,
+	name: 'Football'
+}, {
+	category: 'Sporting Goods',
+	price: '$9.99',
+	stocked: true,
+	name: 'Baseball'
+}, {
+	category: 'Sporting Goods',
+	price: '$29.99',
+	stocked: false,
+	name: 'Basketball'
+}, {
+	category: 'Electronics',
+	price: '$99.99',
+	stocked: true,
+	name: 'iPod Touch'
+}, {
+	category: 'Electronics',
+	price: '$399.99',
+	stocked: false,
+	name: 'iPhone 5'
+}, {
+	category: 'Electronics',
+	price: '$199.99',
+	stocked: true,
+	name: 'Nexus 7'
+}];
+class SearchBar extends React.Component {
+	handleChange = (e) => {
+		this.props.onFilterTextInput(e.target.value)
+	}
+	handleCheckChange = (e) => {
+		this.props.onStockedInput(e.target.checked)
+	}
+	render() {
+		return (
+			<div >
+				<input type='text'
+					   value={this.props.filterText}
+					   placeholder='Searching'
+					   onChange={this.handleChange}/>
+				<br/>
+			    <label for='stocked'>
+			    	<input type='checkbox'
+			    		   name='stocked'
+			    		   checked={this.props.isStockOnly}
+			    		   onChange={this.handleCheckChange}/>
+			    	Only show products in stock
+			    </label>
+			</div>
+		)
+	}
+}
+class ProductCategoryRow extends React.Component {
+	render() {
+		return (
+			<tr>
+				<td colSpan='2'>{this.props.category}</td>
+			</tr>
+		)
+	}
+}
+class ProductRow extends React.Component {
+	render() {
+		let name = this.props.product.stocked ?
+			this.props.product.name :
+			<span style={{color:'red'}}>
+				   {this.props.product.name}
+				   </span>;
+		return (
+			<tr>
+				<td>{name}</td>
+				<td>{this.props.product.price}</td>
+			</tr>
+		)
+	}
+}
+class ProductTable extends React.Component {
+	render() {
+		let rows = [];
+		let lastCategory = null;
+		this.props.products.forEach((item) => {
+			if (item.name.indexOf(this.props.filterText) === -1 ||
+				(!item.stocked && this.props.isStockOnly)) {
+				return;
+			}
+			if (item.category !== lastCategory) {
+				rows.push(<ProductCategoryRow category={item.category}
+											  key={item.category}/>)
+			}
+			rows.push(<ProductRow product={item} key={item.name}/>)
+			lastCategory = item.category;
+		})
+		return (
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						{rows}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+}
+class FilterableProductTable extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			filterText: 'ball',
+			isStockOnly: false
+		}
+	}
+	handleFilterTextInput = (filterText) => {
+		this.setState({
+			filterText: filterText
+		})
+	}
+	handleStockedInput = (isStockOnly) => {
+		this.setState({
+			isStockOnly: isStockOnly
+		})
+	}
+	render() {
+		return (
+			<div>
+				<SearchBar
+					filterText={this.state.filterText}
+					isStockOnly={this.state.isStockOnly}
+					onFilterTextInput={this.handleFilterTextInput}
+					onStockedInput={this.handleStockedInput}
+				/>
+				<ProductTable 
+					products={this.props.products}
+					filterText={this.state.filterText}
+					isStockOnly={this.state.isStockOnly}
+				/>
+			</div>
+		)
+	}
+}
+ReactDOM.render(
+		<FilterableProductTable products={PRODUCTS}/>,
+		document.getElementById('root')
+	)
+	/*找出应用的最小可变状态集
+	  判断方法如下：
+	  1、是通过props从父级传来的吗？如果是，它可能不是state
+	  2、随着时间推移不变吗？如果是，它可能不是state
+	  3、可根据组件中任何其他的state或props把它计算出来？如果是，它不是state
+	*/
