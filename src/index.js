@@ -328,31 +328,31 @@ class Game extends React.Component {
 // ========================================
 
 /*事件处理*/
-class Toggle extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			isToggleOn: true
-		};
-		this.handleClick = this.handleClick.bind(this);
-	}
-	handleClick() {
-		this.setState(prevState => ({
-			isToggleOn: !prevState.isToggleOn
-		}))
-	}
-	render() {
-		return (
-			<button onClick={this.handleClick}>
-				{this.state.isToggleOn?'on':'off'}
-			</button>
-		)
-	}
-}
-ReactDOM.render(
-	<Toggle/>,
-	document.getElementById('root')
-)
+// class Toggle extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			isToggleOn: true
+// 		};
+// 		this.handleClick = this.handleClick.bind(this);
+// 	}
+// 	handleClick() {
+// 		this.setState(prevState => ({
+// 			isToggleOn: !prevState.isToggleOn
+// 		}))
+// 	}
+// 	render() {
+// 		return (
+// 			<button onClick={this.handleClick}>
+// 				{this.state.isToggleOn?'on':'off'}
+// 			</button>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<Toggle/>,
+// 	document.getElementById('root')
+// )
 
 /*注意：组件内回调函数中的this，不会默认指向类的this，若忘记绑定
 类的this，则会报错。
@@ -521,4 +521,136 @@ React建议的处理方法是：
 
 // ========================================
 
-/*表单*/
+/*表单：通常情况下，会构造一个处理提交表单并可访问用户输入表单数据的
+函数，实现这个标准方法，react使用“受控组件”技术*/
+/*受控组件:渲染表单的组件，且控制用户后续输入时所发生的变化*/
+
+/*input表单控件，textarea表单控件与input类似*/
+// class NameForm extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			value: ''
+// 		};
+// 		this.handleChange = this.handleChange.bind(this);
+// 		this.handleSubmit = this.handleSubmit.bind(this);
+// 	}
+// 	handleChange(event) {
+// 		this.setState({
+// 			value: event.target.value
+// 		})
+// 	}
+// 	handleSubmit(event) {
+// 		alert('A name was submitted:' + this.state.value);
+// 		event.preventDefault();
+// 	}
+// 	render() {
+// 		return (
+// 			<form onSubmit={this.handleSubmit}>
+// 				<label>
+// 					Name:
+// 					<input type="text"
+// 						   value={this.state.value}
+// 						   onChange={this.handleChange}
+// 				    />
+// 				</label>
+// 				<input type='submit' value='Submit'/>
+// 			</form>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<NameForm/>,
+// 	document.getElementById('root')
+// )
+
+/*select标签*/
+// class FlavorForm extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			value: 'coconut'
+// 		};
+// 	}
+// 	handleChange = (event) => {
+// 		this.setState({
+// 			value: event.target.value
+// 		})
+// 	}
+// 	handleSubmit = (event) => {
+// 		alert('selected:' + this.state.value);
+// 		event.preventDefault();
+// 	}
+// 	render() {
+// 		return (
+// 			<form onSubmit={this.handleSubmit}>
+// 				<label>
+// 					Pick your favorite La Croix flavor:
+// 					<select value={this.state.value}
+// 							onChange={this.handleChange}>
+// 						<option value='grapefruit'>Grapefruit</option>
+// 						<option value='lime'>Lime</option>
+// 						<option value='coconut'>Coconut</option>
+// 						<option value='mango'>Mango</option>
+// 					</select>
+// 				</label>
+// 				<input type='submit' value='Submit'/>
+// 			</form>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<FlavorForm/>,
+// 	document.getElementById('root')
+// )
+
+/*多个输入的解决方法*/
+// class Reservation extends React.Component {
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			isGo: true,
+// 			number: 2
+// 		}
+// 	}
+// 	handleInputChange = (event) => {
+// 		let target = event.target;
+// 		let value = target.type === 'checkbox' ? target.checked : target.value;
+// 		const name = target.name;
+// 		this.setState({
+// 			[name]: value
+// 		})
+// 	}
+// 	handleSubmit = (event) => {
+// 		console.log(this.state);
+// 		event.preventDefault();
+// 	}
+// 	render() {
+// 		return (
+// 			<form onSubmit={this.handleSubmit}>
+// 				<label>
+// 					Is going:
+// 					<input type='checkbox'
+// 						   name='isGo'
+// 						   checked={this.state.isGo}
+// 						   onChange={this.handleInputChange}/>
+// 				</label>
+// 				<label>
+// 					Number:
+// 					<input type='text'
+// 						   name='number'
+// 						   value={this.state.number}
+// 						   onChange={this.handleInputChange}/>
+// 				</label>
+// 				<input type='submit'
+// 					   value='Submit'/>
+// 			</form>
+// 		)
+// 	}
+// }
+// ReactDOM.render(
+// 	<Reservation/>,
+// 	document.getElementById('root')
+// )
+
+/*受控组件实现比较繁琐，非受控组件来替代这种表单技术*/
